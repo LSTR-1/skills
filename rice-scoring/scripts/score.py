@@ -106,8 +106,6 @@ def compute(cand):
     if not (r_ok and i_ok and e_ok):
         # cannot compute RICE without reach/impact/effort measured
         return None, c, low_conf
-    if effort == 0:
-        return None, c, low_conf
 
     rice = (reach * impact * c) / effort
     return rice, c, low_conf
@@ -133,10 +131,6 @@ def main(argv):
         print("error: top-level JSON must be an array of candidates", file=sys.stderr)
         return 1
 
-    if len(data) < 2:
-        print("error: at least 2 candidates required", file=sys.stderr)
-        return 1
-
     all_errors = []
     for i, cand in enumerate(data):
         all_errors.extend(validate_candidate(cand, i))
@@ -150,6 +144,18 @@ def main(argv):
     for i, cand in enumerate(data):
         rice, conf, low_conf = compute(cand)
         if rice is None:
+            missing = []
+            if not axis_state(cand, "reach")[1]:
+                missing.append("reach")
+            if not axis_state(cand, "impact")[1]:
+                missing.append("impact")
+            if not axis_state(cand, "effort")[1]:
+                missing.append("effort")
+            print(
+                f"warning: skipping '{cand.get('name', f'candidate[{i}]')}' — "
+                f"unmeasured: {', '.join(missing)}",
+                file=sys.stderr,
+            )
             continue  # unmeasured reach/impact/effort -> cannot score
         rows.append({
             "name": cand["name"],

@@ -1,7 +1,7 @@
 ---
 name: rice-scoring
 description: Guides the user through calibrated RICE prioritization (Reach × Impact × Confidence ÷ Effort) and produces a ranked, evidence-traced backlog with a top recommendation. Activates when the user wants to score, rank, or prioritize a list of features or initiatives ("score this backlog", "prioritize these features", "RICE rank my ideas", "help me score with RICE", "what should I build first"). MUST NEVER fabricate a Reach, Impact, Confidence, or Effort value. Do NOT use for research or evidence synthesis (use notebooklm-meta-study or research-to-feature), when the user has no candidate list, or when the user only wants the arithmetic without guided elicitation.
-version: 0.1.0
+version: 0.1.1
 ---
 
 # rice-scoring
