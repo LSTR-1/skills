@@ -34,7 +34,7 @@ ENSURE all four conditions hold before Step 1. If any fails, escalate per Failur
 3. A writable workspace root for `reasoning-records/` and `business-use-case-reports/`.
 4. Tool descriptors are read before the first call to any MCP tool whose schema is not already confirmed in-context.
 
-Reference: <https://github.com/florentin-one-cloud/mcp>
+Reference: <https://github.com/LSTR-1/reasoning>
 
 ## Invoker Context (fixed, non-negotiable)
 

@@ -40,7 +40,7 @@ ENSURE all three conditions hold before Step 0. If any fails, escalate per Failu
 1. The runtime exposes the portal tools `portal_codemode_search` and `portal_codemode_execute` under `server_name: "mcp_Reasoning_Portal"`.
 2. A writable workspace root for `reasoning-records/`.
 
-Reference: <https://github.com/florentin-one-cloud/mcp>
+Reference: <https://github.com/LSTR-1/reasoning>
 
 ## Tool Registry
 
