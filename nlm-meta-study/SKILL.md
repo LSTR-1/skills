@@ -1,6 +1,7 @@
 ---
-name: notebooklm-meta-study
+name: nlm-meta-study
 description: Create scientific meta-studies on any topic using Gemini Notebook (NotebookLM). Invoke for systematic reviews, meta-analyses, evidence synthesis, literature surveys, or multi-source research reports.
+version: 0.1.0
 ---
 
 # NotebookLM Meta-Study
@@ -14,10 +15,10 @@ Three conditions MUST be satisfied before any notebook operation.
 Verify installation by running `nlm doctor`. This command diagnoses the CLI, MCP server binary, and Python environment. If `nlm` is not found on PATH, halt and instruct the user to run:
 
 ```sh
-uv tool install notebooklm-mcp-cli
+pipx install notebooklm-mcp-cli
 ```
 
-Verify authentication by running `nlm login --check`. If the output indicates no valid session, direct the user to run `nlm login`. This launches a dedicated browser profile, extracts cookies, and persists the session. For multi-account setups, `nlm login --profile <name>` isolates credentials.
+Verify authentication by running `nlm login`. If the output indicates no valid session, direct the user to run `nlm login`. This launches a dedicated browser profile, extracts cookies, and persists the session. For multi-account setups, `nlm login --profile <name>` isolates credentials.
 
 Verify MCP server registration by running `nlm setup list`. The output MUST list the agent currently in use (e.g., `claude-code`, `cursor`, `gemini`). If the agent is absent, instruct the user to run:
 

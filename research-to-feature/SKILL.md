@@ -33,7 +33,7 @@ Three skills MUST be installed and operational. Verify via `self-discover` in Ph
 | Skill | Purpose | Verification |
 | --- | --- | --- |
 | `self-discover` | Capability inventory at pipeline start | Invoke and confirm it returns a capability table |
-| `notebooklm-meta-study` | Deep web research and evidence synthesis | `nlm doctor` passes; `nlm login --check` passes |
+| `notebooklm-meta-study` | Deep web research and evidence synthesis | `nlm doctor` passes; `nlm login` passes |
 | `review-business-use-case` | Commercial assessment of meta-study findings | `lstr-reasoning-framework` MCP servers reachable |
 
 Required MCP servers:

@@ -8,7 +8,7 @@ Abridged reference of the 25 most relevant `nlm` commands for meta-study workflo
 
 ```bash
 nlm login                          # Launch browser auth flow
-nlm login --check                  # Validate current credentials
+nlm login                  # Validate current credentials
 nlm login --profile <name>         # Auth with named profile
 nlm login switch <profile>         # Switch default profile
 ```
