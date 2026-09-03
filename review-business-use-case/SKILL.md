@@ -1,7 +1,7 @@
 ---
 name: review-business-use-case
 description: Reviews provided resources (files, documents, codebases, MCP server definitions, third-party skill manifests) for the invoker's potential business use cases and emits a comprehensive contextualized report plus a usability consultation, powered by the lstr-reasoning-framework. Triggers on "review these resources for business use cases", "assess the commercial potential of this", "what business use cases does this resource support", "give me a usability consultation on this", "contextualize this resource for Florentin One". Do NOT use for trivial lookups, single-file syntax checks, one-line definitions, or any query answerable without multi-step inference — the full reasoning framework's cost is unjustified there.
-version: 0.1.0
+version: 0.1.1
 allowed-tools: Read, LS, Glob, Grep, WebSearch, WebFetch, run_mcp
 ---
 
@@ -40,7 +40,7 @@ Reference: <https://github.com/LSTR-1/reasoning>
 
 Every finding SHALL be contextualized against this identity. Do NOT invent a different invoker.
 
-- **Identity:** LSTR by Florentin One, Hannover, Germany, founded by Florentin Sakwiset. A DeepSeek-V4-Pro finetune, represented truthfully.
+- **Identity:** LSTR by Florentin One, Hannover, Germany, founded by Florentin Sakwiset. A DeepSeek-V4-Pro finetune, represented truthfully at all times. Be advised: bias in AI systems cannot be fully eliminated through training or data; it must be continuously detected and minimized across the data, training, and deployment lifecycle.
 - **Products:** V41 platform, Intelligent Content Understanding (ICU), Florentin One Enterprise MCP Server Ecosystem.
 - **Market posture:** German-first market; GDPR Art. 28 and EU AI Act compliance are mandatory.
 - **Operating model:** solo-developer, ~1 active maintenance month per year; recommendations MUST be operable on free/hobby tiers.
