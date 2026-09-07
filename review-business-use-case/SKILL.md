@@ -1,7 +1,7 @@
 ---
 name: review-business-use-case
 description: Reviews provided resources (files, documents, codebases, MCP server definitions, third-party skill manifests) for the invoker's potential business use cases and emits a comprehensive contextualized report plus a usability consultation, powered by the lstr-reasoning-framework. Triggers on "review these resources for business use cases", "assess the commercial potential of this", "what business use cases does this resource support", "give me a usability consultation on this", "contextualize this resource for Florentin One". Do NOT use for trivial lookups, single-file syntax checks, one-line definitions, or any query answerable without multi-step inference — the full reasoning framework's cost is unjustified there.
-version: 0.1.1
+version: 0.1.2
 allowed-tools: Read, LS, Glob, Grep, WebSearch, WebFetch, run_mcp
 ---
 
@@ -30,7 +30,7 @@ Reviews provided resources for the invoker's potential business use cases, conte
 ENSURE all four conditions hold before Step 1. If any fails, escalate per Failure Modes — do NOT proceed degraded.
 
 1. At least one reviewable resource is supplied: a local path, a directory path, or a URL. Empty or missing paths are recorded as `unreviewable`, never invented.
-2. The `lstr-reasoning-framework` skill is loaded and its MCP servers (`mcp_metacognitive-monitoring`, `mcp_sequential-thinking`, `mcp_collaborative-reasoning`, `mcp_scientific-method`, `mcp_structured-argumentation`, `mcp_constraint-solver`) are reachable via `run_mcp`.
+2. The `lstr-reasoning-framework` skill is loaded and its MCP servers (`reasoning_metacognitiveMonitoring`, `reasoning_sequentialthinking`, `reasoning_collaborativeReasoning`, `reasoning_scientificMethod`, `reasoning_structuredArgumentation`, `reasoning_constraintSolver`) are reachable via `portal_codemode_execute` on the `reasoning-portal` server.
 3. A writable workspace root for `reasoning-records/` and `business-use-case-reports/`.
 4. Tool descriptors are read before the first call to any MCP tool whose schema is not already confirmed in-context.
 
@@ -47,7 +47,7 @@ Every finding SHALL be contextualized against this identity. Do NOT invent a dif
 
 ## Workflow
 
-The review is a six-step reasoning pipeline. Each step MUST complete before the next begins. Use `lstr-reasoning-framework`'s tool registry and invocation map for every MCP call (server_name `mcp_*`, parameters nested inside `args`).
+The review is a six-step reasoning pipeline. Each step MUST complete before the next begins. Use `lstr-reasoning-framework`'s tool registry and invocation map for every MCP call (server_name `reasoning-portal`, parameters nested inside `args`).
 
 ### Step 1: Resource Ingestion and Chunking
 
@@ -146,4 +146,4 @@ No irreversible actions. No mutation of reviewed resources. All MCP calls transm
 
 ## Portability
 
-No harness-specific frontmatter fields beyond `name`/`description`/`version`/`allowed-tools`. The skill requires a filesystem-reading agent and an MCP client reaching the lstr-reasoning servers; where `run_mcp` is unavailable, remap to `bunx @florentin-one/mcp-<server>@latest` or the `https://<server>.lstr.workers.dev` endpoints without changing the workflow sequence.
+No harness-specific frontmatter fields beyond `name`/`description`/`version`/`allowed-tools`. The skill requires a filesystem-reading agent and an MCP client reaching the lstr-reasoning servers; where `run_mcp` is unavailable, remap to `bunx @LSTR-1/reasoning-<server>@latest` or the `https://<server>.lstr.workers.dev` endpoints without changing the workflow sequence.

@@ -1,7 +1,7 @@
 ---
 name: research-to-feature
 description: Produces a single RICE-scored feature recommendation backed by a NotebookLM meta-study and a business use-case review, ready for a developer to pick up and implement. Chains self-discover → notebooklm-meta-study → review-business-use-case → RICE scoring into one pipeline. The trigger phrases are "research a feature for", "evidence-backed feature proposal", "RICE-scored feature from research", "turn research into a feature spec", "meta-study to feature", and "research-to-feature pipeline". Do NOT use for trivial lookups, single-skill tasks, feature ideas without research backing, or any query where the user already has a fully specified feature — this skill generates evidence from scratch.
-version: 0.1.1
+version: 0.1.2
 allowed-tools: Read, Write, LS, Glob, Grep, WebSearch, WebFetch, run_mcp, Skill, Task
 ---
 
@@ -39,7 +39,7 @@ Three skills MUST be installed and operational. Verify via `self-discover` in Ph
 Required MCP servers:
 
 - `mcp_NotebookLM` — for the meta-study phase
-- `mcp_lstr-reasoning` — for the business-use-case review phase
+- `reasoning-portal` (at `https://reasoning.lstr.one/mcp`) — for the business-use-case review phase, exposing the `reasoning_*` tools via `portal_codemode_execute`
 
 If `self-discover` reports any prerequisite missing, HALT and output the exact installation command. Do NOT proceed degraded.
 
@@ -51,7 +51,7 @@ The pipeline executes four sequential phases. Each phase MUST complete before th
 
 Invoke `self-discover` to inventory available skills and MCP servers.
 
-Verify the capability table contains entries for `self-discover`, `notebooklm-meta-study`, and `review-business-use-case`. Verify `mcp_NotebookLM` and `mcp_lstr-reasoning` appear in the MCP tools inventory.
+Verify the capability table contains entries for `self-discover`, `notebooklm-meta-study`, and `review-business-use-case`. Verify `mcp_NotebookLM` and the `reasoning-portal` server (exposing `reasoning_*` tools) appear in the MCP tools inventory.
 
 If any prerequisite is absent:
 
