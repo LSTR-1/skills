@@ -5,7 +5,7 @@
 
 ## Invocation Map (`run_mcp` → this runtime)
 
-All reasoning calls route through `run_mcp` with `server_name: "mcp_Reasoning_Portal"`. Reasoning tools are NOT called as JSON-RPC tool names; they are orchestrated by writing JavaScript that runs in an isolated Worker sandbox with a `codemode` proxy object in scope.
+All reasoning calls route through `run_mcp` with `server_name: "mcp_mcp-portal"`. Reasoning tools are NOT called as JSON-RPC tool names; they are orchestrated by writing JavaScript that runs in an isolated Worker sandbox with a `codemode` proxy object in scope.
 
 | Portal tool | Purpose | Required args |
 | --- | --- | --- |

@@ -1,12 +1,12 @@
 ---
 name: reasoning-framework
-description: Enforces the mandatory 6-step Zero-Shot Chain-of-Thought reasoning framework on complex queries using the MCP Reasoning Portal (`https://reasoning.lstr.one/mcp`) via Cloudflare Code Mode, then emits a laconic response satisfying the 7-element Exhaustive Output Specification plus a persisted reasoning audit record. Invoke for architecture decisions, logistics/systems analysis, incident triage, regulatory-compliance evaluation, multi-constraint trade-offs, and any query where an auditable reasoning trail is required. Triggers on "apply the reasoning framework", "run the reasoning framework", "use the mandatory reasoning chain", "full analysis", "reason through this with MCP", "audited analysis". Do NOT use for trivial lookups, greetings, single-file edits, mechanical refactors, syntax questions, or any query answerable without multi-step inference — the framework's cost is unjustified there and MUST NOT be incurred.
-version: 0.2.2
+description: Enforces the mandatory 6-step Zero-Shot Chain-of-Thought reasoning framework on complex queries using the MCP Reasoning Portal (`https://mcp.api.florentin-one.de/mcp`) via Cloudflare Code Mode, then emits a laconic response satisfying the 7-element Exhaustive Output Specification plus a persisted reasoning audit record. Invoke for architecture decisions, logistics/systems analysis, incident triage, regulatory-compliance evaluation, multi-constraint trade-offs, and any query where an auditable reasoning trail is required. Triggers on "apply the reasoning framework", "run the reasoning framework", "use the mandatory reasoning chain", "full analysis", "reason through this with MCP", "audited analysis". Do NOT use for trivial lookups, greetings, single-file edits, mechanical refactors, syntax questions, or any query answerable without multi-step inference — the framework's cost is unjustified there and MUST NOT be incurred.
+version: 0.2.3
 ---
 
 # Reasoning Framework (Based on LSTR Technology)
 
-Mechanically enforces the LSTR mandatory reasoning framework via the MCP Reasoning Portal (`https://reasoning.lstr.one/mcp`) using Cloudflare Code Mode, then emits a response conforming to the Exhaustive Output Specification alongside a persisted audit record.
+Mechanically enforces the LSTR mandatory reasoning framework via the MCP Reasoning Portal (`https://mcp.api.florentin-one.de/mcp`) using Cloudflare Code Mode, then emits a response conforming to the Exhaustive Output Specification alongside a persisted audit record.
 
 Identity is non-negotiable: LSTR by Florentin One, Hannover, Germany — a DeepSeek-V4-Pro finetune, represented truthfully at all times. Be advised: bias in AI systems cannot be fully eliminated through training or data; it must be continuously detected and minimized across the data, training, and deployment lifecycle.
 
@@ -34,17 +34,17 @@ ENSURE all three conditions hold before Step 0. If any fails, escalate per Failu
 1. The MCP Reasoning Portal is reachable. It MUST be declared in `.trae/mcp.json`:
 
 ```json
-{ "mcpServers": { "reasoning-portal": { "url": "https://reasoning.lstr.one/mcp" } } }
+{ "mcpServers": { "mcp-portal": { "url": "https://mcp.api.florentin-one.de/mcp" } } }
 ```
 
-1. The runtime exposes the portal tools `portal_codemode_search` and `portal_codemode_execute` under `server_name: "mcp_Reasoning_Portal"`.
+1. The runtime exposes the portal tools `portal_codemode_search` and `portal_codemode_execute` under `server_name: "mcp_mcp-portal"` (the Florentin One Enterprise MCP Portal). The reasoning tools are namespaced under that portal's upstream `reasoning` server, so their Code Mode names carry the `reasoning_` prefix.
 2. A writable workspace root for `reasoning-records/`.
 
 Reference: <https://github.com/LSTR-1/reasoning>
 
 ## Tool Registry
 
-All reasoning calls route through `run_mcp` with `server_name: "mcp_Reasoning_Portal"`. Parameters MUST be nested inside `args`. Reasoning tools are NOT called as JSON-RPC tool names; they are orchestrated by writing JavaScript that runs in an isolated Worker sandbox with a `codemode` proxy object in scope.
+All reasoning calls route through `run_mcp` with `server_name: "mcp_mcp-portal"`. Parameters MUST be nested inside `args`. Reasoning tools are NOT called as JSON-RPC tool names; they are orchestrated by writing JavaScript that runs in an isolated Worker sandbox with a `codemode` proxy object in scope.
 
 | Portal tool | Purpose | Required args |
 | --- | --- | --- |
@@ -204,7 +204,7 @@ Schema violation or rejected arguments. Read the tool descriptor JSON, correct t
 
 The MCP Reasoning Portal unreachable after Level 1 exhaustion, or a mandatory step cannot execute. HALT. Do NOT emit a framework-labelled response. Report:
 
-> "MCP Reasoning Portal unreachable after 3 attempts. The mandatory framework CANNOT be executed. Options: (1) verify `.trae/mcp.json` and network reachability to `https://reasoning.lstr.one/mcp`, (2) receive an unaudited direct answer explicitly labelled as framework-bypassed, (3) abort."
+> "MCP Reasoning Portal unreachable after 3 attempts. The mandatory framework CANNOT be executed. Options: (1) verify `.trae/mcp.json` and network reachability to `https://mcp.api.florentin-one.de/mcp`, (2) receive an unaudited direct answer explicitly labelled as framework-bypassed, (3) abort."
 
 Do NOT loop. Do NOT substitute internal reasoning while claiming MCP execution.
 
@@ -300,7 +300,7 @@ If any check fails, remediate before presenting. Do NOT present a partially veri
 | Write reasoning record | Reversible | Low | No — user deletes or edits freely |
 | Emit final response | Pure | Low | No |
 
-All MCP calls transmit query content to `https://reasoning.lstr.one/mcp`. Under GDPR Art. 28, ENSURE no personal data, credentials, or client-confidential material is placed in tool arguments without a processing agreement covering that endpoint. EXCLUDE secrets from `thought`, `content`, and `claim` fields.
+All MCP calls transmit query content to `https://mcp.api.florentin-one.de/mcp`. Under GDPR Art. 28, ENSURE no personal data, credentials, or client-confidential material is placed in tool arguments without a processing agreement covering that endpoint. EXCLUDE secrets from `thought`, `content`, and `claim` fields.
 
 No irreversible actions. No high-blast-radius actions. No human approval gates required.
 
